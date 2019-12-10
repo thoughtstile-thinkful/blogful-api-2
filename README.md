@@ -1,4 +1,28 @@
-### Installed Files
+Start Postgres with:
+
+```
+postgres
+```
+
+Reset Postgres (postmaster.pid errors) with:
+
+```
+pg_ctl -D /usr/local/var/postgres stop -s -m fast
+```
+
+After Postgres is started, Create Database with:
+
+```
+createdb -U dunder_mifflin blogful-test
+```
+
+Move example.env to .env with:
+
+```
+mv example.env .env
+```
+
+---
 
 Used for migrations:
 
@@ -29,4 +53,10 @@ Install knex:
 
 ```
 npm i knex
+```
+
+Migrate test database:
+
+```
+npm run migrate:test
 ```
