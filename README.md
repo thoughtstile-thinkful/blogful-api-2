@@ -20,6 +20,12 @@ Knex Driver for Postgrator:
 npm i pg
 ```
 
+Sanitizing tool:
+
+```
+npm i xss
+```
+
 Move example.env to .env with:
 
 ```
