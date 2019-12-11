@@ -45,18 +45,30 @@ articlesRouter
       .catch(next);
   });
 
-articlesRouter.route('/:article_id').get((req, res, next) => {
-  const knexInstance = req.app.get('db');
-  ArticlesService.getById(knexInstance, req.params.article_id)
-    .then(article => {
-      if (!article) {
-        return res.status(404).json({
-          error: { message: 'Article doesn\'t exist' }
-        });
-      }
-      res.json(serializeArticle(article));
-    })
-    .catch(next);
-});
+articlesRouter
+  .route('/:article_id')
+  .all((req, res, next) => {
+    ArticlesService.getById(req.app.get('db'), req.params.article_id)
+      .then(article => {
+        if (!article) {
+          return res.status(404).json({
+            error: { message: 'Article doesn\'t exist' }
+          });
+        }
+        res.article = article; // save the article for the next middleware
+        next(); // don't forget to call next so the next middleware happens!
+      })
+      .catch(next);
+  })
+  .get((req, res, next) => {
+    res.json(serializeArticle(res.article));
+  })
+  .delete((req, res, next) => {
+    ArticlesService.deleteArticle(req.app.get('db'), req.params.article_id)
+      .then(() => {
+        res.status(204).end();
+      })
+      .catch(next);
+  });
 
 module.exports = articlesRouter;
