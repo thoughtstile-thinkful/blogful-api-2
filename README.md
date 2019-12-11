@@ -1,3 +1,33 @@
+## Express/Postgres Reference
+
+### Installation
+
+Install knex (lets you use .sql in javascript):
+
+```
+npm i knex
+```
+
+Install Postgrator (used for migrations):
+
+```
+npm install postgrator-cli --save-dev
+```
+
+Knex Driver for Postgrator:
+
+```
+npm i pg
+```
+
+Move example.env to .env with:
+
+```
+mv example.env .env
+```
+
+### Commands
+
 Start Postgres with:
 
 ```
@@ -13,50 +43,24 @@ pg_ctl -D /usr/local/var/postgres stop -s -m fast
 After Postgres is started, Create Database with:
 
 ```
+createdb -U <user> <database>
 createdb -U dunder_mifflin blogful-test
 ```
 
-Move example.env to .env with:
-
-```
-mv example.env .env
-```
-
----
-
-Used for migrations:
-
-```
-npm i postgrator-cli@3.2.0 -D
-```
-
-Knex Driver:
-
-```
-npm i pg
-```
-
-Migration Commands:
+Examples of Migration Commands:
 
 ```
 npm run migrate -- 0
 npm run migrate
+npm run migrate:test
 ```
 
 Seeding database command:
 
 ```
+psql -U <user> -d <database> -f <seed-file>
+
 psql -U dunder_mifflin -d blogful -f ./seeds/seed.blogful_articles.sql
 ```
 
-Install knex:
-
-```
-npm i knex
-```
-
-Migrate test database:
-
-```
-npm run migrate:tests
-```
+---
