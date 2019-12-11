@@ -58,5 +58,5 @@ npm i knex
 Migrate test database:
 
 ```
-npm run migrate:test
+npm run migrate:tests
 ```
