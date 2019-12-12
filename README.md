@@ -70,3 +70,10 @@ psql -U dunder_mifflin -d blogful -f ./seeds/seed.blogful_articles.sql
 ```
 
 ---
+
+Logging into a Postgres database:
+
+```
+psql -U <user> -d <database>
+psql -U dunder_mifflin -d products
+```
